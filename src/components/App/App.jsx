@@ -1,11 +1,11 @@
-
+import SearchPage from '../SearchPage/SearchPage'
 import './App.css'
 
 function App() {
   
   return (
     <div className='app'>
-    <h1>asdf asdf</h1>
+    <SearchPage/>
     </div>
   )
 
