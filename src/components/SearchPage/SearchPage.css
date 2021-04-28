@@ -1,0 +1,12 @@
+.gifCard{
+    border:1px solid black;
+    width: 200px;
+    margin: 10px;
+   
+}
+.gifContainer{
+     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: top;
+}

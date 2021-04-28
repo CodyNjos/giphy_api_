@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { TextField, Button } from "@material-ui/core"
+import { TextField, Button } from "@material-ui/core";
+import './SearchPage.css'
 function SearchPage() {
     const dispatch = useDispatch();
     const store = useSelector(store => store);
@@ -26,15 +27,15 @@ function SearchPage() {
         onChange={(e)=> setSearch(e.target.value)}
         />
         <Button variant="outlined" onClick={dispatchSearch}>Search</Button>
-       <div>
-        
+       <div className="gifContainer">
        {store.search.data.map((gif)=>{
            return(
-            <div key={gif.id}>
+            <div key={gif.id} className="gifCard">
                 <img src={gif.images.fixed_width.url}/>
             </div>
            )
-       }) }
+}) }
+
         </div>
         </>
         
