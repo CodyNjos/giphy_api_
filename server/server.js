@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 5000;
 
 // Route includes
 const gifRouter = require('./routes/giphy.router');
+const userRouter = require('./routes/user.router')
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -18,6 +19,7 @@ app.use(express.static('build'));
 
 // Routes
 app.use('/api/gif', gifRouter);
+app.use('/api/user', userRouter)
 
 
 // Listen
