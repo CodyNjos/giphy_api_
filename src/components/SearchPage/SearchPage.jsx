@@ -7,11 +7,26 @@ function SearchPage() {
     const dispatch = useDispatch();
     const store = useSelector(store => store);
     const [search, setSearch] = useState("")
+    const [searched, setSearched] = useState(false)
+    const [displayMessage, setDisplayMessage] = useState("Search For Some Gifs")
 
     
 
     const dispatchSearch = () => {
+        setSearched(!searched)
+        setTimeout(updateDisplayMessage, 4 * 1000)
         dispatch({ type: "FETCH_SEARCH", payload: { data: search } })
+    }
+
+    const updateDisplayMessage = () => {
+        console.log(noOfPages)
+        if(store.search.data.length === 0){
+            setDisplayMessage("No Results")
+            return;
+        }if(store.search.data.length != 0){
+            setDisplayMessage("")
+            return;
+        }
     }
 
     // used for mat ui pagination
@@ -22,7 +37,7 @@ function SearchPage() {
     useEffect(() => {
         console.log('search page')
         setNoOfPages(Math.ceil(store.search.data.length / itemsPerPage));
-    }, [store.search.data]);
+    }, [store.search]);
 
     const handleChange = (event, value) => {
         setPage(value);
@@ -58,6 +73,7 @@ function SearchPage() {
                     showFirstButton
                     showLastButton />
                 }
+                {noOfPages === 0 && <p> {displayMessage} </p>}
             </div>
         </>
 
