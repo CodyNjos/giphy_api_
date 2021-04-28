@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/search/:search', (req, res) => {
  
-    const GIPHY_URL = `https://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY_API_KEY}&q=${req.params.search}&limit=10`
+    const GIPHY_URL = `https://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY_API_KEY}&q=${req.params.search}&limit=50`
     axios.get(GIPHY_URL).then(response => {
         res.status(200).send(response.data);
     }).catch(err => {
