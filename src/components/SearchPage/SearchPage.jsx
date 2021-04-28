@@ -1,28 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { TextField } from "@material-ui/core"
+import { TextField, Button } from "@material-ui/core"
 function SearchPage() {
     const dispatch = useDispatch();
     const store = useSelector(store => store);
     const [search, setSearch] = useState("")
-    useEffect(() => {
-     console.log('search page')
-     if(search != ""){
-        dispatch({type: "FETCH_SEARCH", payload: {data: search}})
-        }
-    }, [search]);
-    
-    const changeSearch = (e) => {
-        console.log(e)
-        if(e != ""){
-        setSearch(e)
-        }
-        else{
-            dispatch({type:"CLEAR_SEARCH"})
-            setSearch("")
-        }
-    }
-   
+    // useEffect(() => {
+    //  console.log('search page')
+    //  if(search != ""){
+    //     dispatch({type: "FETCH_SEARCH", payload: {data: search}})
+    //     }
+    // }, [search]);
+
+   const dispatchSearch = () => {
+    dispatch({type: "FETCH_SEARCH", payload: {data: search}})
+   }
     
     
     return(
@@ -31,8 +23,9 @@ function SearchPage() {
         <TextField
         label = "search"
         value={search}
-        onChange={(e)=> changeSearch(e.target.value)}
+        onChange={(e)=> setSearch(e.target.value)}
         />
+        <Button variant="outlined" onClick={dispatchSearch}>Search</Button>
        <div>
         
        {store.search.data.map((gif)=>{
