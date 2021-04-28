@@ -1,28 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App/App.jsx';
-import createSagaMiddleware from 'redux-saga';
-import { takeEvery, put } from 'redux-saga/effects';
-import axios from 'axios';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
+import rootReducer from './redux/reducers/_root.reducer';
+import rootSaga from './redux/sagas/_root.saga';
+import App from './components/App/App';
 
 
-
-function* rootGiphySaga() {
-};
 
 const sagaMiddleware = createSagaMiddleware();
+const middlewareList = process.env.NODE_ENV === 'development' ?
+  [sagaMiddleware, logger] :
+  [sagaMiddleware];
 
-
-const storeInstance = createStore(
-    combineReducers({
-       
-    }),
-    applyMiddleware(sagaMiddleware, logger)
+const store = createStore(
+  rootReducer,
+  applyMiddleware(...middlewareList),
 );
+sagaMiddleware.run(rootSaga);
 
-sagaMiddleware.run(rootGiphySaga);
-
-ReactDOM.render(<Provider store={storeInstance}><App /> </Provider>, document.getElementById('root'));
+ReactDOM.render(<Provider store={store}><App /> </Provider>, document.getElementById('root'));
