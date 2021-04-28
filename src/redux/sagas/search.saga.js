@@ -4,7 +4,7 @@ import axios from 'axios';
 function* fetchGiphySearch(action) {
     console.log('newGif', action.payload)
     try {
-        let response = yield axios.get(`/api/gif/search/${action.payload}`)
+        let response = yield axios.get(`/api/gif/search/${action.payload.data}`)
         yield put({ type: 'SET_SEARCH', payload: response.data })
     } catch (error) {
         console.log(`Error getting new gif`, error);
