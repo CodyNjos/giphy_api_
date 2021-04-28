@@ -46,6 +46,7 @@ function SearchPage() {
                         </div>
                     )
                 })}
+                {noOfPages > 0 &&
                 <Pagination
                     style={{ margin: "auto" }}
                     className="pagination"
@@ -56,6 +57,7 @@ function SearchPage() {
                     defaultPage={1}
                     showFirstButton
                     showLastButton />
+                }
             </div>
         </>
 
