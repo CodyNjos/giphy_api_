@@ -16,8 +16,9 @@ function App() {
   }, [dispatch]);
   return (
     <Router>
+      
     <div className='app'>
-      <Nav/>
+    <Nav/>
     <ProtectedRoute
       path="/search">
     <SearchPage/>
