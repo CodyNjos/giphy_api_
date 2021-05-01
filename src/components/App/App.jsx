@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import SearchPage from '../SearchPage/SearchPage'
 import './App.css'
 import Login from '../Login/Login'
+import Nav from '../Nav/Nav'
 
 function App() {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ function App() {
   return (
     <Router>
     <div className='app'>
+      <Nav/>
     <ProtectedRoute
       path="/search">
     <SearchPage/>
