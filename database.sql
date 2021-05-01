@@ -1,20 +1,14 @@
-CREATE DATABASE "giphy_search_favorites";
+CREATE DATABASE "giphy_api_challenge";
 
--- You'll need a table for storing each giphy image favorite
--- Each favorite image can be assigned 1 of the following categories as a Foreign Key
-
--- Category table
-CREATE TABLE "category" (
+CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
-    "name" VARCHAR (100) NOT NULL
+    "username" VARCHAR (80) UNIQUE NOT NULL,
+    "password" VARCHAR (1000) NOT NULL
 );
 
 
-CREATE TABLE "favorites" (
+CREATE TABLE "rated" (
     "id" SERIAL PRIMARY KEY,
-    "url" VARCHAR (200),
-    "category_id" INT REFERENCES "category"
+    "url" VARCHAR (2083),
+    "rating" INT
 );
-
-INSERT INTO "favorites" ("url", "category_id")
-VALUES ('https://media1.giphy.com/media/26n7b7PjSOZJwVCmY/giphy.gif?cid=ecf05e47apbe3ix8h1tl6tbomhxov9ostvm90kuc2edttcbc&rid=giphy.gif', '2');
