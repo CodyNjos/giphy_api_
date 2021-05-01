@@ -29,7 +29,9 @@ function Nav() {
          <Link className="navLink" to="/Search">
             Search
         </Link>
+        {user.id &&
         <LogOutButton className="navLink" />
+        }
         </div>
         </div>
     )
