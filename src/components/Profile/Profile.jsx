@@ -1,9 +1,11 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
+import './Profile.css'
 
 function Profile() {
 
     const user = useSelector((store) => store.user);
+    const rated = useSelector((store) => store.rated)
     const dispatch = useDispatch();
 
   useEffect(() => {
@@ -11,7 +13,20 @@ function Profile() {
   }, []);
 
     return(
+        <>
         <h1> {user.username}'s profile</h1>
+        <div className="gifContainer">
+        {rated[0] &&
+        rated.map((gif) => {
+            return(
+                <div key={gif.id} className="gifCard">
+                <img src={gif.url}/>
+                <p>Rating:{gif.rating}</p>
+                </div>
+            )
+        })}
+        </div>
+        </>
     )
 }
 export default Profile
