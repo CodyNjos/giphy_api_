@@ -15,12 +15,51 @@ router.get('/search/:search', (req, res) => {
     });
   });
 
+// Request used to rate gifs
+router.post('/rate', (req, res) => {
+    const gifUrl = req.body.url
+    const userId = req.body.id
+    const rating = req.body.rating
+
+    const queryText = 
+    `INSERT INTO "rated" ("url", "user_id", "rating") 
+    VALUES ($1, $2, $3);`;
+  
+    pool.query(queryText, [gifUrl, userId, rating]).then(() => {
+      console.log('Rating added successfully');
+      res.sendStatus(201);
+    }).catch(err => {
+      console.log('Error in rating', err);
+      res.sendStatus(500);
+    });
+  });
+
+// Request used to update gif rating
+router.put('/updateRating', (req, res) => { 
+    const gifId = req.body.id;
+    const newRating = req.body.rating;
+    
+    const queryText = `
+        UPDATE "rated" 
+        SET "rating" = $1
+        WHERE "id" = $2;`;
+
+    pool.query(queryText, [newRating, gifId]).then(() => {
+      res.sendStatus(200);
+    }).catch(err => {
+      console.log('Error in update', err);
+      res.sendStatus(500);
+    });
+  });
+
 // Request used to get rated gifs
 router.get('/rated', (req, res) => {
+
     const query = 
     `SELECT * 
     FROM "rated"
     WHERE "user_id" = $1`
+
     pool.query(query, [req.body.id])
         .then(result => {
             console.log(result.rows)
@@ -30,4 +69,5 @@ router.get('/rated', (req, res) => {
         res.send(500);
     });
   });
+
   module.exports = router
