@@ -53,14 +53,14 @@ router.put('/updateRating', (req, res) => {
   });
 
 // Request used to get rated gifs
-router.get('/rated', (req, res) => {
+router.get('/rated/:id', (req, res) => {
 
     const query = 
     `SELECT * 
     FROM "rated"
     WHERE "user_id" = $1`
 
-    pool.query(query, [req.body.id])
+    pool.query(query, [req.params.id])
         .then(result => {
             console.log(result.rows)
             res.send(result.rows)
