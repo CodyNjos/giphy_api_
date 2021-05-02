@@ -34,8 +34,12 @@ function SearchPage() {
     const itemsPerPage = 10;
     const [noOfPages, setNoOfPages] = useState(Math.ceil(store.search.data.length / itemsPerPage))
     
+
     useEffect(() => {
-        console.log('search page')
+        dispatch({ type: "CLEAR_SEARCH"})
+    }, []);
+
+    useEffect(() => {
         setNoOfPages(Math.ceil(store.search.data.length / itemsPerPage));
     }, [store.search]);
 
