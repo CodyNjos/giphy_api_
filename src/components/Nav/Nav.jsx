@@ -18,19 +18,23 @@ function Nav() {
   
     
     return(
-        <div className="nav">
-        <Link to="/">
+      <div className="nav">
+      <Link to="/">
         <h2 className="nav-title">Giphy API</h2>
       </Link>
       <div>
-      <Link className="navLink" to={loginLinkData.path}>
-              {loginLinkData.text}
-            </Link>
-         <Link className="navLink" to="/Search">
+      <Link className="navLink" 
+        to={loginLinkData.path}>
+            {loginLinkData.text}
+      </Link>
+      {user.id &&
+      <>
+      <Link className="navLink" to="/Search">
             Search
-        </Link>
-        {user.id &&
+      </Link>
+       
         <LogOutButton className="navLink" />
+        </>
         }
         </div>
         </div>
