@@ -70,4 +70,19 @@ router.get('/rated', (req, res) => {
     });
   });
 
+// Request used to remove rated gifs
+router.delete('/delete/:id', (req, res) => {
+    const id = req.params.id
+
+    const queryText = 
+    `DELETE FROM "rated" 
+    WHERE "id" = $1;`;
+  
+    pool.query(queryText, [id]).then(() => {
+      res.sendStatus(204);
+    }).catch(err => {
+      console.log('Error in delete', err);
+      res.sendStatus(500);
+    });
+  });
   module.exports = router
