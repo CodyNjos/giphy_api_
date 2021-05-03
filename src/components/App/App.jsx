@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import {HashRouter as Router, Redirect, Switch } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { useDispatch } from 'react-redux';
 import SearchPage from '../SearchPage/SearchPage'

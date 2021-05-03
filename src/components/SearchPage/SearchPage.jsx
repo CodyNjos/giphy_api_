@@ -9,39 +9,26 @@ function SearchPage() {
     const store = useSelector(store => store);
     const [search, setSearch] = useState("")
     const [searched, setSearched] = useState(false)
-    const [displayMessage, setDisplayMessage] = useState("Search For Some Gifs")
-
-
 
     const dispatchSearch = () => {
         setSearched(!searched)
-        setTimeout(updateDisplayMessage, 4 * 1000)
         dispatch({ type: "FETCH_SEARCH", payload: { data: search } })
     }
 
-    const updateDisplayMessage = () => {
-        if (store.search.data.length === 0) {
-            setDisplayMessage("No Results")
-            return;
-        } if (store.search.data.length != 0) {
-            setDisplayMessage("Search For Some Gifs")
-            return;
-        }
-    }
-
-    // used for mat ui pagination
+    // used for material ui pagination
     const [page, setPage] = useState(1);
     const itemsPerPage = 10;
     const [noOfPages, setNoOfPages] = useState(Math.ceil(store.search.data.length / itemsPerPage))
-    const [rating, setRating] = useState(0)
+    useEffect(() => {
+        setNoOfPages(Math.ceil(store.search.data.length / itemsPerPage));
+    }, [store.search]);
+    //
 
     useEffect(() => {
         dispatch({ type: "CLEAR_SEARCH" })
     }, []);
 
-    useEffect(() => {
-        setNoOfPages(Math.ceil(store.search.data.length / itemsPerPage));
-    }, [store.search]);
+   
 
     const handleChange = (event, value) => {
         setPage(value);
@@ -81,7 +68,14 @@ function SearchPage() {
                         showLastButton />
                 </div>        
                 }
-                {noOfPages === 0 && <p> {displayMessage} </p>}
+                {noOfPages === 0 &&
+                    <>
+                    {store.search.data.length === 0 && !store.search.meta &&
+                        <p> Search For Some Gifs! </p>}
+                    {store.search.data.length === 0 && store.search.meta &&
+                        <p>No Results. Try Another Search!</p>}
+                    </> 
+                }
         </>
 
     )
