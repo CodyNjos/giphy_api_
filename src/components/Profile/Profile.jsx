@@ -74,11 +74,17 @@ function Profile() {
                 {rated[0] &&
                     rated.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((gif) => {
                         return (
+
                             <div key={gif.id} className="gifCard">
+                                
                                 <img className="gif" src={gif.url} />
-                                <p>Rating:{gif.rating}</p>
+                                <p className="gifRating">Rating:{gif.rating}</p>
+                                <div className="rateWrap">
                                 <ProfileRate gif={gif} /> <br />
-                                <Button onClick={() => handleOpen(gif)}>Delete</Button>
+                                </div>
+                                <div className = "deleteWrap">
+                                <Button className ="deleteButton" variant="contained" onClick={() => handleOpen(gif)}>Delete</Button>
+                                </div>
                             </div>
                         )
                     })}

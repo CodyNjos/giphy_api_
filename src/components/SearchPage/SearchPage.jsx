@@ -49,7 +49,9 @@ function SearchPage() {
                     return (
                         <div key={gif.id} className="gifCard">
                             <img className="gif" src={gif.images.fixed_width.url} /><br />
+                            <div className = "rateWrap">
                             <SearchRate gif={gif} />
+                            </div>
                         </div>
                     )
                 })}

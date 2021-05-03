@@ -18,7 +18,7 @@ function SearchRate({ gif }) {
     return (
         <>
             {rating === "" ?
-                <FormControl style={{ width: '90%' }}>
+                <FormControl style={{ width: '90%'}}>
                     <InputLabel id="rating">Add Rating</InputLabel>
                     <Select
 

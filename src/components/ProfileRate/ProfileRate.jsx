@@ -17,7 +17,7 @@ function ProfileRate({ gif }) {
 
     return (
         <>
-            <FormControl style={{ width: '90%' }}>
+            <FormControl style={{ width: '90%'  }}>
                 <InputLabel id="rating">Update Rating</InputLabel>
                 <Select
 
