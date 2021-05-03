@@ -17,10 +17,10 @@ function ProfileRate ({gif}) {
 
     return (
         <>
-        <FormControl>
+        <FormControl style={{ width: '90%' }}>
             <InputLabel id="rating">Update Rating</InputLabel>
             <Select
-            style={{ width: '10em' }}
+            
             labelId="rating"
             value={rating}
             onChange={(e) => rateGif(e.target.value)}

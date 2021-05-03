@@ -61,15 +61,16 @@ function SearchPage() {
                 {store.search.data.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((gif) => {
                     return (
                         <div key={gif.id} className="gifCard">
-                            <img src={gif.images.fixed_width.url} />
-                           
+                            <img className="gif" src={gif.images.fixed_width.url} /><br/>
                             <SearchRate  gif = {gif}/>
                         </div>
                     )
                 })}
-                {noOfPages > 0 &&
+                
+            </div>
+            {noOfPages > 0 &&
+                <div className="pagWrap">
                     <Pagination
-                        style={{ margin: "auto" }}
                         className="pagination"
                         count={noOfPages}
                         shape="rounded"
@@ -78,9 +79,9 @@ function SearchPage() {
                         defaultPage={1}
                         showFirstButton
                         showLastButton />
+                </div>        
                 }
                 {noOfPages === 0 && <p> {displayMessage} </p>}
-            </div>
         </>
 
     )
