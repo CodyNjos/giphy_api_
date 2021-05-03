@@ -19,9 +19,11 @@ function App() {
   
   return (
     <Router>
-      
+    
     <div className='app'>
     <Nav/>
+    <Switch>
+    <Redirect exact from="/" to="/login" />
     <ProtectedRoute
       path="/search">
     <SearchPage/>
@@ -44,7 +46,9 @@ function App() {
     <Register/>
     </ProtectedRoute>
 
+    </Switch>
     </div>
+
     </Router>
   )
 
