@@ -30,7 +30,7 @@ function SearchPage() {
 
 
 
-    const handleChange = (value) => {
+    const handleChange = (event, value) => {
         setPage(value);
     }
 

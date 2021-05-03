@@ -27,7 +27,7 @@ function Profile() {
      useEffect(() => {
          setNoOfPages(Math.ceil(rated.length / itemsPerPage));
      }, [rated]);
-     const handleChange = (value) => {
+     const handleChange = (event, value) => {
         setPage(value);
     }
      //
