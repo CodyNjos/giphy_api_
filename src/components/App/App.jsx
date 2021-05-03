@@ -32,15 +32,18 @@ function App() {
     <Profile/>
     </ProtectedRoute>
 
-    <Route
-      path="/login">
+    <ProtectedRoute
+      path="/login"
+      authRedirect="/search">
     <Login/>
-    </Route>
+    </ProtectedRoute>
 
-    <Route
-      path="/register">
+    <ProtectedRoute
+      path="/register"
+      authRedirect="/search">
     <Register/>
-    </Route>
+    </ProtectedRoute>
+
     </div>
     </Router>
   )
