@@ -5,58 +5,58 @@ import { useHistory } from 'react-router-dom';
 
 
 function Register() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const dispatch = useDispatch();
-  const history = useHistory();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const dispatch = useDispatch();
+    const history = useHistory();
 
-  const registerUser = (event) => {
-    event.preventDefault();
+    const registerUser = (event) => {
+        event.preventDefault();
 
-    dispatch({
-      type: 'REGISTER',
-      payload: {
-        username: username,
-        password: password,
-      },
-    });
-  };
+        dispatch({
+            type: 'REGISTER',
+            payload: {
+                username: username,
+                password: password,
+            },
+        });
+    };
 
-  return (
-    <>
-    <form className="formPanel" onSubmit={registerUser}>
-      <h1>Register User</h1>
-      <div>
-          <TextField
-            label="User Name"
-            name="username"
-            value={username}
-            required
-            onChange={(event) => setUsername(event.target.value)}
-          />
-      </div>
-      <div>
-          <TextField
-            type="password"
-            label="Password"
-            value={password}
-            required
-            onChange={(event) => setPassword(event.target.value)}
-          />
+    return (
+        <>
+            <form className="formPanel" onSubmit={registerUser}>
+                <h1>Register</h1>
+                <div>
+                    <TextField
+                        label="User Name"
+                        name="username"
+                        value={username}
+                        required
+                        onChange={(event) => setUsername(event.target.value)}
+                    />
+                </div>
+                <div>
+                    <TextField
+                        type="password"
+                        label="Password"
+                        value={password}
+                        required
+                        onChange={(event) => setPassword(event.target.value)}
+                    />
 
-        <br />
-      </div>
-      <div>
-        <Button type="submit" >Register</Button>
-      </div>
-    </form>
-    <button
-        className="registerBtn"
-        onClick={() => {history.push('/login');}}>
-        Already Have An Account?
+                    <br />
+                </div>
+                <div>
+                    <Button type="submit" >Register</Button>
+                </div>
+            </form>
+            <button
+                className="registerBtn"
+                onClick={() => { history.push('/login'); }}>
+                Already Have An Account?
     </button>
-    </>
-  );
+        </>
+    );
 }
 
 export default Register;

@@ -25,21 +25,19 @@ function Login() {
   };
 
   return (
-  <>
-    <form onSubmit={login}>
-      <h1>Login</h1>
-      <div>
-      
+    <>
+      <form className="formPanel" onSubmit={login}>
+        <h1>Login</h1>
+        <div>
           <TextField
-            label = "Username"
+            label="Username"
             required
             value={username}
             onChange={(event) => setUsername(event.target.value)}
           />
+        </div>
+        <div>
 
-      </div>
-      <div>
-       
           <TextField
             type="password"
             label="Password"
@@ -47,17 +45,17 @@ function Login() {
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
-      </div>
-      <div>
-        <Button type="submit" >Login</Button>
-      </div>
-    </form>
-    <button
+        </div>
+        <div>
+          <Button type="submit" >Login</Button>
+        </div>
+      </form>
+      <button
         className="registerBtn"
-        onClick={() => {history.push('/register');}}>
+        onClick={() => { history.push('/register'); }}>
         Need An Account?
     </button>
-</>
+    </>
   );
 }
 
