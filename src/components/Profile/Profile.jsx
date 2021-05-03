@@ -20,6 +20,10 @@ function Profile() {
       setFilterText(`Gifs Rated ${rating}`)
       dispatch({type:'FETCH_RATED_BY_RATING', payload: {rating: rating, id: user.id } })
   }
+  const resetFilter = () => {
+    dispatch({ type: 'FETCH_RATED', payload: { id: user.id} });
+  }
+
     return(
         <>
        
@@ -31,8 +35,9 @@ function Profile() {
             <Button className='inputButton' onClick ={()=> updateFilter(3) }>Three</Button>
             <Button className='inputButton' onClick ={()=> updateFilter(4) }>Four</Button>
             <Button className='inputButton' onClick ={()=> updateFilter(5) }>Five</Button>
+            <Button className='inputButton' onClick ={()=> resetFilter()}>All</Button>
         </ButtonGroup>
-        {rated[0] ? <h2>{filterText}</h2> : <h2>No Gifs Found</h2>}
+        {rated[0] ? <h2>{filterText}</h2> : <> <h2>{filterText}</h2> <h2>No Gifs Found</h2></>}
         <div className="gifContainer">
         {rated[0] &&
         rated.map((gif) => {
