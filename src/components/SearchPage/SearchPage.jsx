@@ -37,19 +37,23 @@ function SearchPage() {
 
     return (
         <>
-            <h1>search</h1>
+            <h1>Gif Search</h1>
+            <div className="searchBar">
             <TextField
-                label="search"
+                label="Search"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
             />
-            <Button variant="outlined" onClick={dispatchSearch}>Search</Button>
+            <Button  onClick={dispatchSearch}>Search</Button>
+            </div>
             <div className="gifContainer">
                 {store.search.data.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((gif) => {
                     return (
                         <div key={gif.id} className="gifCard">
                             <img className="gif" src={gif.images.fixed_width.url} /><br />
+                            <div className = "rateWrap">
                             <SearchRate gif={gif} />
+                            </div>
                         </div>
                     )
                 })}
@@ -71,7 +75,7 @@ function SearchPage() {
             {noOfPages === 0 &&
                 <>
                     {store.search.data.length === 0 && !store.search.meta &&
-                        <p> Search For Some Gifs! </p>}
+                        <p> Search For Some Gifs! <br/> Rated Gifs Can Be Found On Profile Page.</p>}
                     {store.search.data.length === 0 && store.search.meta &&
                         <p>No Results. Try Another Search!</p>}
                 </>

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { TextField, Button, ButtonGroup, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import { useEffect } from 'react'
+import Pagination from '@material-ui/lab/Pagination';
 import { useSelector, useDispatch } from 'react-redux';
 import ProfileRate from "../ProfileRate/ProfileRate"
 import './Profile.css'
@@ -8,6 +9,7 @@ import './Profile.css'
 function Profile() {
 
     const user = useSelector((store) => store.user);
+    const store = useSelector((store) => store)
     const rated = useSelector((store) => store.rated)
     const [filterText, setFilterText] = useState("All Rated Gifs")
     const [open, setOpen] = useState(false);
@@ -17,6 +19,18 @@ function Profile() {
     useEffect(() => {
         dispatch({ type: 'FETCH_RATED', payload: { id: user.id } });
     }, []);
+
+     // used for material ui pagination
+     const [page, setPage] = useState(1);
+     const itemsPerPage = 10;
+     const [noOfPages, setNoOfPages] = useState(Math.ceil(store.search.data.length / itemsPerPage))
+     useEffect(() => {
+         setNoOfPages(Math.ceil(rated.length / itemsPerPage));
+     }, [rated]);
+     const handleChange = (event, value) => {
+        setPage(value);
+    }
+     //
 
     const updateFilter = (rating) => {
         setFilterText(`Gifs Rated ${rating}`)
@@ -58,17 +72,34 @@ function Profile() {
             {rated[0] ? <h2>{filterText}</h2> : <> <h2>{filterText}</h2> <h2>No Gifs Found</h2></>}
             <div className="gifContainer">
                 {rated[0] &&
-                    rated.map((gif) => {
+                    rated.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((gif) => {
                         return (
+
                             <div key={gif.id} className="gifCard">
+                                
                                 <img className="gif" src={gif.url} />
-                                <p>Rating:{gif.rating}</p>
+                                <p className="gifRating">Rating:{gif.rating}</p>
+                                <div className="rateWrap">
                                 <ProfileRate gif={gif} /> <br />
-                                <Button onClick={() => handleOpen(gif)}>Delete</Button>
+                                </div>
+                                <div className = "deleteWrap">
+                                <Button className ="deleteButton" variant="contained" onClick={() => handleOpen(gif)}>Delete</Button>
+                                </div>
                             </div>
                         )
                     })}
             </div>
+            <div className="pagWrap">
+                    <Pagination
+                        className="pagination"
+                        count={noOfPages}
+                        shape="rounded"
+                        variant="outlined"
+                        onChange={handleChange}
+                        defaultPage={1}
+                        showFirstButton
+                        showLastButton />
+                </div>
             <Dialog
                 open={open}
                 onClose={handleClose}
