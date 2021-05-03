@@ -3,8 +3,7 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 
 const app = express();
-// App PORT set with production check
-const PORT = process.env.PORT || 5000;
+
 
 const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');
@@ -31,7 +30,8 @@ app.use(passport.session());
 app.use('/api/gif', gifRouter);
 app.use('/api/user', userRouter)
 
-
+// App PORT set with production check
+const PORT = process.env.PORT || 5000;
 // Listen
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
