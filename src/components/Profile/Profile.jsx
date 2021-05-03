@@ -108,7 +108,7 @@ function Profile() {
                 <DialogContent >
                     <p className={"dialogText"}>
                         <img src={gifToDelete.url} /> <br />
-                        It will no longer appear in you rated gifs.
+                        It will no longer appear in your rated gifs.
                     </p>
                 </DialogContent>
                 <DialogActions>
