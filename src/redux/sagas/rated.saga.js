@@ -10,9 +10,17 @@ function* fetchRated(action) {
         console.log(`Error getting new gif`, error);
     };
 };
-
+function* addRated(action) {
+    console.log("in add Rate")
+    try {
+       axios.post(`/api/gif/rate`, action.payload)
+    } catch (error) {
+        console.log(`Error adding rating`, error);
+    };
+}
 function* ratedSaga() {
     yield takeLatest('FETCH_RATED', fetchRated);
+    yield takeLatest('ADD_RATED', addRated)
 
 }
 

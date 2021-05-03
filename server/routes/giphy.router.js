@@ -20,7 +20,7 @@ router.post('/rate', (req, res) => {
     const gifUrl = req.body.url
     const userId = req.body.id
     const rating = req.body.rating
-
+    console.log(rating, userId, gifUrl)
     const queryText = 
     `INSERT INTO "rated" ("url", "user_id", "rating") 
     VALUES ($1, $2, $3);`;
