@@ -24,7 +24,7 @@ function* fetchByRating(action) {
 function* addRated(action) {
     console.log("in add Rate")
     try {
-       axios.post(`/api/gif/rate`, action.payload)
+       yield axios.post(`/api/gif/rate`, action.payload)
     } catch (error) {
         console.log(`Error adding rating`, error);
     };
@@ -32,7 +32,16 @@ function* addRated(action) {
 function* updateRated(action) {
     console.log("IN UPDATE")
     try {
-        axios.put(`/api/gif/updateRating`, action.payload)
+        yield axios.put(`/api/gif/updateRating`, action.payload)
+        yield put({type : "FETCH_RATED", payload : {id : action.payload.userId }})
+     } catch (error) {
+         console.log(`Error adding rating`, error);
+     };
+}
+function* deleteRated(action) {
+    console.log('In Delete', action.payload)
+    try {
+        yield axios.delete(`/api/gif/delete/${action.payload.id}`)
         yield put({type : "FETCH_RATED", payload : {id : action.payload.userId }})
      } catch (error) {
          console.log(`Error adding rating`, error);
@@ -43,6 +52,7 @@ function* ratedSaga() {
     yield takeLatest('FETCH_RATED_BY_RATING', fetchByRating)
     yield takeLatest('ADD_RATED', addRated)
     yield takeLatest('UPDATE_RATED', updateRated)
+    yield takeLatest('DELETE_RATED', deleteRated )
 
 }
 

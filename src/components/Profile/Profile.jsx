@@ -24,6 +24,10 @@ function Profile() {
     setFilterText("All Rated Gifs")
     dispatch({ type: 'FETCH_RATED', payload: { id: user.id} });
   }
+  const deleteGif = (id) => {
+    console.log(id)
+    dispatch({ type: "DELETE_RATED", payload: {id : id, userId : user.id }})
+  }
 
     return(
         <>
@@ -47,6 +51,7 @@ function Profile() {
                 <img src={gif.url}/>
                 <p>Rating:{gif.rating}</p>
                 <ProfileRate  gif={gif}/>
+                <Button onClick ={()=> deleteGif(gif.id)}>Delete</Button>
                 </div>
             )
         })}
