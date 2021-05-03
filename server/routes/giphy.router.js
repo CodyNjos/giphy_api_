@@ -70,6 +70,26 @@ router.get('/rated/:id', (req, res) => {
     });
   });
 
+// Request used to filter rated gifs by rating
+
+router.get('/ratedByRating/:id/:rating', (req, res) => {
+
+  const query = 
+  `SELECT * 
+  FROM "rated"
+  WHERE "user_id" = $1
+  AND "rating" = $2`
+
+  pool.query(query, [req.params.id, req.params.rating])
+      .then(result => {
+          console.log(result.rows)
+          res.send(result.rows)
+  }).catch(err => {
+      console.log('Error getting rated gifs', err.response)
+      res.send(500);
+  });
+});
+
 // Request used to remove rated gifs
 router.delete('/delete/:id', (req, res) => {
     const id = req.params.id
