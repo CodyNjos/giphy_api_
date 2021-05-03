@@ -1,64 +1,62 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { TextField, Button } from '@material-ui/core'
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import "./Login.css"
 
-function Login() {
+
+function Register() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const history = useHistory();
   const dispatch = useDispatch();
+  const history = useHistory();
 
-  const login = (event) => {
+  const registerUser = (event) => {
     event.preventDefault();
 
-    if (username && password) {
-      dispatch({
-        type: 'LOGIN',
-        payload: {
-          username: username,
-          password: password,
-        },
-      });
-    }
+    dispatch({
+      type: 'REGISTER',
+      payload: {
+        username: username,
+        password: password,
+      },
+    });
   };
 
   return (
-  <>
-    <form onSubmit={login}>
-      <h1>Login</h1>
+    <>
+    <form className="formPanel" onSubmit={registerUser}>
+      <h1>Register User</h1>
       <div>
-      
           <TextField
-            label = "Username"
-            required
+            label="User Name"
+            name="username"
             value={username}
+            required
             onChange={(event) => setUsername(event.target.value)}
           />
-
       </div>
       <div>
-       
           <TextField
             type="password"
             label="Password"
-            required
             value={password}
+            required
             onChange={(event) => setPassword(event.target.value)}
           />
+
+        <br />
       </div>
       <div>
-        <Button type="submit" >Login</Button>
+        <Button type="submit" >Register</Button>
       </div>
     </form>
     <button
         className="registerBtn"
-        onClick={() => {history.push('/register');}}>
-        Need An Account?
+        onClick={() => {history.push('/login');}}>
+        Already Have An Account?
     </button>
-</>
+    </>
   );
 }
 
-export default Login;
+export default Register;
