@@ -1,7 +1,8 @@
 .gifCard{
     border:1px solid black;
-    width: 200px;
+    width: 18%;
     margin: 10px;
+
    
 }
 .gifContainer{
@@ -9,4 +10,13 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: top;
+}
+.gif{
+    max-width: 95%;
+}
+.pagWrap{
+    padding-top: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
