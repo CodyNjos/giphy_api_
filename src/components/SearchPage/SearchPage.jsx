@@ -61,8 +61,7 @@ function SearchPage() {
                 {store.search.data.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((gif) => {
                     return (
                         <div key={gif.id} className="gifCard">
-                            <img className="gif" src={gif.images.fixed_width.url} />
-                           
+                            <img className="gif" src={gif.images.fixed_width.url} /><br/>
                             <SearchRate  gif = {gif}/>
                         </div>
                     )

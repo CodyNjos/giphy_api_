@@ -59,9 +59,9 @@ function Profile() {
                     rated.map((gif) => {
                         return (
                             <div key={gif.id} className="gifCard">
-                                <img src={gif.url} />
+                                <img className="gif" src={gif.url} />
                                 <p>Rating:{gif.rating}</p>
-                                <ProfileRate gif={gif} />
+                                <ProfileRate gif={gif} /> <br/>
                                 <Button onClick={() => handleOpen(gif)}>Delete</Button>
                             </div>
                         )
