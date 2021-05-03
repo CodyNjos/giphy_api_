@@ -1,0 +1,7 @@
+.inputButton{
+    color:black
+}
+.inputButton:focus{
+    color: white;
+    background-color: #033076;
+  }

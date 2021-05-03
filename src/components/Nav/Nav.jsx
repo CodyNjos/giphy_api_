@@ -18,7 +18,7 @@ function Nav() {
   
     
     return(
-      <div className="nav">
+    <div className="nav">
       <Link to="/">
         <h2 className="nav-title">Giphy API</h2>
       </Link>
@@ -32,12 +32,11 @@ function Nav() {
       <Link className="navLink" to="/Search">
             Search
       </Link>
-       
-        <LogOutButton className="navLink" />
+      <LogOutButton className="navLink" />
         </>
         }
-        </div>
-        </div>
+      </div>
+    </div>
     )
 }
 

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button, Select, MenuItem, InputLabel, FormControl } from "@material-ui/core";
 import Pagination from '@material-ui/lab/Pagination';
+import SearchRate  from "../SearchRate/SearchRate"
 import './SearchPage.css'
 function SearchPage() {
     const dispatch = useDispatch();
@@ -10,7 +11,7 @@ function SearchPage() {
     const [searched, setSearched] = useState(false)
     const [displayMessage, setDisplayMessage] = useState("Search For Some Gifs")
 
-    
+
 
     const dispatchSearch = () => {
         setSearched(!searched)
@@ -19,12 +20,11 @@ function SearchPage() {
     }
 
     const updateDisplayMessage = () => {
-        console.log(noOfPages)
-        if(store.search.data.length === 0){
+        if (store.search.data.length === 0) {
             setDisplayMessage("No Results")
             return;
-        }if(store.search.data.length != 0){
-            setDisplayMessage("")
+        } if (store.search.data.length != 0) {
+            setDisplayMessage("Search For Some Gifs")
             return;
         }
     }
@@ -33,16 +33,20 @@ function SearchPage() {
     const [page, setPage] = useState(1);
     const itemsPerPage = 10;
     const [noOfPages, setNoOfPages] = useState(Math.ceil(store.search.data.length / itemsPerPage))
-    
+    const [rating, setRating] = useState(0)
+
     useEffect(() => {
-        console.log('search page')
+        dispatch({ type: "CLEAR_SEARCH" })
+    }, []);
+
+    useEffect(() => {
         setNoOfPages(Math.ceil(store.search.data.length / itemsPerPage));
     }, [store.search]);
 
     const handleChange = (event, value) => {
         setPage(value);
     }
-
+    
 
     return (
         <>
@@ -58,20 +62,22 @@ function SearchPage() {
                     return (
                         <div key={gif.id} className="gifCard">
                             <img src={gif.images.fixed_width.url} />
+                           
+                            <SearchRate  gif = {gif}/>
                         </div>
                     )
                 })}
                 {noOfPages > 0 &&
-                <Pagination
-                    style={{ margin: "auto" }}
-                    className="pagination"
-                    count={noOfPages}
-                    shape="rounded"
-                    variant="outlined"
-                    onChange={handleChange}
-                    defaultPage={1}
-                    showFirstButton
-                    showLastButton />
+                    <Pagination
+                        style={{ margin: "auto" }}
+                        className="pagination"
+                        count={noOfPages}
+                        shape="rounded"
+                        variant="outlined"
+                        onChange={handleChange}
+                        defaultPage={1}
+                        showFirstButton
+                        showLastButton />
                 }
                 {noOfPages === 0 && <p> {displayMessage} </p>}
             </div>
