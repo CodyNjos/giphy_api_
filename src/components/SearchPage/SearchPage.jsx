@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { TextField, Button, Select, MenuItem, InputLabel, FormControl } from "@material-ui/core";
 import Pagination from '@material-ui/lab/Pagination';
-import SearchRate  from "../SearchRate/SearchRate"
+import SearchRate from "../SearchRate/SearchRate"
 import './SearchPage.css'
 function SearchPage() {
     const dispatch = useDispatch();
@@ -28,12 +28,12 @@ function SearchPage() {
         dispatch({ type: "CLEAR_SEARCH" })
     }, []);
 
-   
+
 
     const handleChange = (event, value) => {
         setPage(value);
     }
-    
+
 
     return (
         <>
@@ -48,12 +48,12 @@ function SearchPage() {
                 {store.search.data.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((gif) => {
                     return (
                         <div key={gif.id} className="gifCard">
-                            <img className="gif" src={gif.images.fixed_width.url} /><br/>
-                            <SearchRate  gif = {gif}/>
+                            <img className="gif" src={gif.images.fixed_width.url} /><br />
+                            <SearchRate gif={gif} />
                         </div>
                     )
                 })}
-                
+
             </div>
             {noOfPages > 0 &&
                 <div className="pagWrap">
@@ -66,16 +66,16 @@ function SearchPage() {
                         defaultPage={1}
                         showFirstButton
                         showLastButton />
-                </div>        
-                }
-                {noOfPages === 0 &&
-                    <>
+                </div>
+            }
+            {noOfPages === 0 &&
+                <>
                     {store.search.data.length === 0 && !store.search.meta &&
                         <p> Search For Some Gifs! </p>}
                     {store.search.data.length === 0 && store.search.meta &&
                         <p>No Results. Try Another Search!</p>}
-                    </> 
-                }
+                </>
+            }
         </>
 
     )

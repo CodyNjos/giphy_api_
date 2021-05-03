@@ -26,7 +26,6 @@ function* registerUser(action) {
   }
 }
 
-
 function* userSaga() {
   yield takeEvery('FETCH_USER', fetchUser);
   yield takeEvery('REGISTER', registerUser)

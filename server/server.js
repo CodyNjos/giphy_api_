@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Serve static files
 app.use(express.static('build'));
 
-// Passport Session Configuration //
+// Passport Session Configuration 
 app.use(sessionMiddleware);
 
 // start up passport sessions

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {HashRouter as Router, Redirect, Switch } from 'react-router-dom';
+import { HashRouter as Router, Redirect, Switch } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { useDispatch } from 'react-redux';
 import SearchPage from '../SearchPage/SearchPage'
@@ -16,38 +16,38 @@ function App() {
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
   }, [dispatch]);
-  
+
   return (
     <Router>
-    
-    <div className='app'>
-    <Nav/>
-    <Switch>
-    <Redirect exact from="/" to="/login" />
-    <ProtectedRoute
-      path="/search">
-    <SearchPage/>
-    </ProtectedRoute>
 
-    <ProtectedRoute
-      path="/user">
-    <Profile/>
-    </ProtectedRoute>
+      <div className='app'>
+        <Nav />
+        <Switch>
+          <Redirect exact from="/" to="/login" />
+          <ProtectedRoute
+            path="/search">
+            <SearchPage />
+          </ProtectedRoute>
 
-    <ProtectedRoute
-      path="/login"
-      authRedirect="/search">
-    <Login/>
-    </ProtectedRoute>
+          <ProtectedRoute
+            path="/user">
+            <Profile />
+          </ProtectedRoute>
 
-    <ProtectedRoute
-      path="/register"
-      authRedirect="/search">
-    <Register/>
-    </ProtectedRoute>
+          <ProtectedRoute
+            path="/login"
+            authRedirect="/search">
+            <Login />
+          </ProtectedRoute>
 
-    </Switch>
-    </div>
+          <ProtectedRoute
+            path="/register"
+            authRedirect="/search">
+            <Register />
+          </ProtectedRoute>
+
+        </Switch>
+      </div>
 
     </Router>
   )

@@ -45,14 +45,14 @@ function Profile() {
 
             <h1> {user.username}'s Profile</h1>
             <h2>Filter By Rating</h2>
-            <ButtonGroup variant="text" style={{ color:"black" }}>
+            <ButtonGroup variant="text" style={{ color: "black" }}>
                 <Button className='inputButton' onClick={() => updateFilter(1)}>One</Button>
                 <Button className='inputButton' onClick={() => updateFilter(2)}>Two</Button>
                 <Button className='inputButton' onClick={() => updateFilter(3)}>Three</Button>
                 <Button className='inputButton' onClick={() => updateFilter(4)}>Four</Button>
                 <Button className='inputButton' onClick={() => updateFilter(5)}>Five</Button>
                 {filterText != "All Rated Gifs" &&
-                <Button className='inputButton' onClick={() => resetFilter()}>All</Button>
+                    <Button className='inputButton' onClick={() => resetFilter()}>All</Button>
                 }
             </ButtonGroup>
             {rated[0] ? <h2>{filterText}</h2> : <> <h2>{filterText}</h2> <h2>No Gifs Found</h2></>}
@@ -63,7 +63,7 @@ function Profile() {
                             <div key={gif.id} className="gifCard">
                                 <img className="gif" src={gif.url} />
                                 <p>Rating:{gif.rating}</p>
-                                <ProfileRate gif={gif} /> <br/>
+                                <ProfileRate gif={gif} /> <br />
                                 <Button onClick={() => handleOpen(gif)}>Delete</Button>
                             </div>
                         )
@@ -76,7 +76,7 @@ function Profile() {
                 <DialogTitle >{`Are you sure you want to remove this gif?`}</DialogTitle>
                 <DialogContent >
                     <p className={"dialogText"}>
-                    <img src = {gifToDelete.url}/> <br/>
+                        <img src={gifToDelete.url} /> <br />
                         It will no longer appear in you rated gifs.
                     </p>
                 </DialogContent>
@@ -85,7 +85,7 @@ function Profile() {
                         Cancel
                     </Button>
                     <Button onClick={() => deleteGif()} variant="contained" color="secondary">
-                        Remove 
+                        Remove
                     </Button>
                 </DialogActions>
             </Dialog>
