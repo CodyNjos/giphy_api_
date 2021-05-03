@@ -1,6 +1,11 @@
 .app{
     text-align: center;
     margin-top: 0px;
+    position: relative;;
+    min-height: 100vh;
+}
+.content{
+    padding-bottom: 40px;
 }
 body{
     margin: 0px;

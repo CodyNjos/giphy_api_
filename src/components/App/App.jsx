@@ -8,6 +8,7 @@ import Login from '../Login/Login'
 import Register from "../Register/Register"
 import Nav from '../Nav/Nav'
 import Profile from "../Profile/Profile"
+import Footer from "../Footer/Footer"
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
     <Router>
 
       <div className='app'>
+        <div className='content'>
         <Nav />
         <Switch>
           <Redirect exact from="/" to="/login" />
@@ -47,8 +49,10 @@ function App() {
           </ProtectedRoute>
 
         </Switch>
+        </div>
+        <Footer/>
       </div>
-
+      
     </Router>
   )
 
