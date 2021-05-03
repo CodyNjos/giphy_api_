@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { TextField, Button, Select, MenuItem, InputLabel, FormControl } from "@material-ui/core";
 import Pagination from '@material-ui/lab/Pagination';
-import RateRadios from "../SearchRateRadios/SearchRateRadios"
+import SearchRateRadios from "../SearchRateRadios/SearchRateRadios"
 import './SearchPage.css'
 function SearchPage() {
     const dispatch = useDispatch();
@@ -63,7 +63,7 @@ function SearchPage() {
                         <div key={gif.id} className="gifCard">
                             <img src={gif.images.fixed_width.url} />
                            
-                            <RateRadios gif = {gif}/>
+                            <SearchRateRadios gif = {gif}/>
                         </div>
                     )
                 })}

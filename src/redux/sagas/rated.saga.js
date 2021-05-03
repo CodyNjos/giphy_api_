@@ -1,5 +1,6 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
+import userSaga from './user.saga';
 
 function* fetchRated(action) {
     console.log('rated gifs for', action.payload.id)
@@ -18,9 +19,19 @@ function* addRated(action) {
         console.log(`Error adding rating`, error);
     };
 }
+function* updateRated(action) {
+    console.log("IN UPDATE")
+    try {
+        axios.put(`/api/gif/updateRating`, action.payload)
+        yield put({type : "FETCH_RATED", payload : {id : action.payload.userId }})
+     } catch (error) {
+         console.log(`Error adding rating`, error);
+     };
+}
 function* ratedSaga() {
     yield takeLatest('FETCH_RATED', fetchRated);
     yield takeLatest('ADD_RATED', addRated)
+    yield takeLatest('UPDATE_RATED', updateRated)
 
 }
 
