@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import {TextField} from '@material-ui/core'
+import { TextField, Button } from '@material-ui/core'
+import { useHistory } from 'react-router-dom';
+import "./Login.css"
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const login = (event) => {
@@ -23,36 +25,39 @@ function Login() {
   };
 
   return (
+  <>
     <form onSubmit={login}>
-      <h2>Login</h2>
+      <h1>Login</h1>
       <div>
-        <label htmlFor="username">
-          Username:
+      
           <TextField
-            type="text"
-            name="username"
+            label = "Username"
             required
             value={username}
             onChange={(event) => setUsername(event.target.value)}
           />
-        </label>
+
       </div>
       <div>
-        <label htmlFor="password">
-          Password:
+       
           <TextField
             type="password"
-            name="password"
+            label="Password"
             required
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
-        </label>
       </div>
       <div>
-        <input className="btn" type="submit" name="submit" value="Log In" />
+        <Button type="submit" >Login</Button>
       </div>
     </form>
+    <button
+        className="registerBtn"
+        onClick={() => {history.push('/register');}}>
+        Need An Account?
+    </button>
+</>
   );
 }
 

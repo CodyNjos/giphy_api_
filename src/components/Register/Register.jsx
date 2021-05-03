@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { TextField, Button } from '@material-ui/core'
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
 
 function Register() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const registerUser = (event) => {
     event.preventDefault();
@@ -20,6 +23,7 @@ function Register() {
   };
 
   return (
+    <>
     <form className="formPanel" onSubmit={registerUser}>
       <h1>Register User</h1>
       <div>
@@ -46,6 +50,12 @@ function Register() {
         <Button type="submit" >Register</Button>
       </div>
     </form>
+    <button
+        className="registerBtn"
+        onClick={() => {history.push('/login');}}>
+        Already Have An Account?
+    </button>
+    </>
   );
 }
 
