@@ -20,13 +20,11 @@ router.post('/rate', (req, res) => {
     const gifUrl = req.body.url
     const userId = req.body.id
     const rating = req.body.rating
-    console.log(rating, userId, gifUrl)
     const queryText = 
     `INSERT INTO "rated" ("url", "user_id", "rating") 
     VALUES ($1, $2, $3);`;
   
     pool.query(queryText, [gifUrl, userId, rating]).then(() => {
-      console.log('Rating added successfully');
       res.sendStatus(201);
     }).catch(err => {
       console.log('Error in rating', err);
@@ -63,7 +61,6 @@ router.get('/rated/:id', (req, res) => {
 
     pool.query(query, [req.params.id])
         .then(result => {
-            console.log(result.rows)
             res.send(result.rows)
     }).catch(err => {
         console.log('Error getting rated gifs', err.response)
@@ -83,7 +80,6 @@ router.get('/ratedByRating/:id/:rating', (req, res) => {
 
   pool.query(query, [req.params.id, req.params.rating])
       .then(result => {
-          console.log(result.rows)
           res.send(result.rows)
   }).catch(err => {
       console.log('Error getting rated gifs', err.response)

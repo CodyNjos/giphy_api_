@@ -3,7 +3,6 @@ import axios from 'axios';
 import userSaga from './user.saga';
 
 function* fetchRated(action) {
-    console.log('rated gifs for', action.payload.id)
     try {
         let response = yield axios.get(`/api/gif/rated/${action.payload.id}`)
         yield put({ type: 'SET_RATED', payload: response.data })
@@ -12,8 +11,6 @@ function* fetchRated(action) {
     };
 };
 function* fetchByRating(action) {
-    console.log("in by rating")
-    console.log(action.payload)
     try {
         let response = yield axios.get(`/api/gif/ratedByRating/${action.payload.id}/${action.payload.rating}`)
         yield put({ type: 'SET_RATED', payload: response.data })
@@ -22,7 +19,6 @@ function* fetchByRating(action) {
     };
 }
 function* addRated(action) {
-    console.log("in add Rate")
     try {
        yield axios.post(`/api/gif/rate`, action.payload)
     } catch (error) {
@@ -30,7 +26,6 @@ function* addRated(action) {
     };
 }
 function* updateRated(action) {
-    console.log("IN UPDATE")
     try {
         yield axios.put(`/api/gif/updateRating`, action.payload)
         yield put({type : "FETCH_RATED", payload : {id : action.payload.userId }})
@@ -39,7 +34,6 @@ function* updateRated(action) {
      };
 }
 function* deleteRated(action) {
-    console.log('In Delete', action.payload)
     try {
         yield axios.delete(`/api/gif/delete/${action.payload.id}`)
         yield put({type : "FETCH_RATED", payload : {id : action.payload.userId }})
