@@ -1,6 +1,6 @@
 # Giphy Api
 
-A deployed version of this app can be found at [https://giphychallenge.herokuapp.com/](https://giphychallenge.herokuapp.com/)
+A deployed version of this app can be found at [https://giphychallenge.herokuapp.com/](https://giphychallenge.herokuapp.com/)      
 This is hosted on a free cloud server, and may take 1-2 minutes to initially boot up.
 
 This is a Giphy search and rating app made for a code challenge.
