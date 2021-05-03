@@ -21,6 +21,7 @@ function Profile() {
       dispatch({type:'FETCH_RATED_BY_RATING', payload: {rating: rating, id: user.id } })
   }
   const resetFilter = () => {
+    setFilterText("All Rated Gifs")
     dispatch({ type: 'FETCH_RATED', payload: { id: user.id} });
   }
 

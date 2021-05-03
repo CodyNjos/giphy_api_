@@ -58,7 +58,8 @@ router.get('/rated/:id', (req, res) => {
     const query = 
     `SELECT * 
     FROM "rated"
-    WHERE "user_id" = $1`
+    WHERE "user_id" = $1
+    ORDER BY "rating" DESC`
 
     pool.query(query, [req.params.id])
         .then(result => {
