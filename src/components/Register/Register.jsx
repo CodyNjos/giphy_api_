@@ -25,7 +25,7 @@ function Register() {
   return (
     <>
     <form className="formPanel" onSubmit={registerUser}>
-      <h1>Register User</h1>
+      <h1>Register</h1>
       <div>
           <TextField
             label="User Name"

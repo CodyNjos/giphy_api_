@@ -26,17 +26,15 @@ function Login() {
 
   return (
   <>
-    <form onSubmit={login}>
+    <form className="formPanel" onSubmit={login}>
       <h1>Login</h1>
       <div>
-      
           <TextField
             label = "Username"
             required
             value={username}
             onChange={(event) => setUsername(event.target.value)}
           />
-
       </div>
       <div>
        
