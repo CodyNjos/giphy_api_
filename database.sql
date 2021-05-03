@@ -9,6 +9,7 @@ CREATE TABLE "user" (
 
 CREATE TABLE "rated" (
     "id" SERIAL PRIMARY KEY,
+    "user_id" INT REFERENCES "user" NOT NULL,
     "url" VARCHAR (2083),
-    "rating" INT
+    "rating" INT NOT NULL
 );
