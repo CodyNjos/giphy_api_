@@ -95,7 +95,7 @@ router.delete('/delete/:id', (req, res) => {
     `DELETE FROM "rated" 
     WHERE "id" = $1;`;
 
-  pool.query(queryText, [id]).then(() => {ß
+  pool.query(queryText, [id]).then(() => {
     res.sendStatus(204);
   }).catch(err => {
     console.log('Error in delete', err);
