@@ -1,8 +1,8 @@
-import { useState } from 'react'  
-import { TextField, Button, ButtonGroup } from '@material-ui/core';
+import { useState } from 'react'
+import { TextField, Button, ButtonGroup, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import ProfileRate  from "../ProfileRate/ProfileRate"
+import ProfileRate from "../ProfileRate/ProfileRate"
 import './Profile.css'
 
 function Profile() {
@@ -10,52 +10,87 @@ function Profile() {
     const user = useSelector((store) => store.user);
     const rated = useSelector((store) => store.rated)
     const [filterText, setFilterText] = useState("All Rated Gifs")
+    const [open, setOpen] = useState(false);
+    const [gifToDelete, setGifToDelete] = useState({})
     const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch({ type: 'FETCH_RATED', payload: { id: user.id} });
-  }, []);
+    useEffect(() => {
+        dispatch({ type: 'FETCH_RATED', payload: { id: user.id } });
+    }, []);
 
-  const updateFilter = (rating) => {
-      setFilterText(`Gifs Rated ${rating}`)
-      dispatch({type:'FETCH_RATED_BY_RATING', payload: {rating: rating, id: user.id } })
-  }
-  const resetFilter = () => {
-    setFilterText("All Rated Gifs")
-    dispatch({ type: 'FETCH_RATED', payload: { id: user.id} });
-  }
-  const deleteGif = (id) => {
-    console.log(id)
-    dispatch({ type: "DELETE_RATED", payload: {id : id, userId : user.id }})
-  }
+    const updateFilter = (rating) => {
+        setFilterText(`Gifs Rated ${rating}`)
+        dispatch({ type: 'FETCH_RATED_BY_RATING', payload: { rating: rating, id: user.id } })
+    }
+    const resetFilter = () => {
+        setFilterText("All Rated Gifs")
+        dispatch({ type: 'FETCH_RATED', payload: { id: user.id } });
+    }
+    const handleOpen = (gif) => {
+        setGifToDelete(gif)
+        setOpen(true);
+    };
 
-    return(
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const deleteGif = () => {
+        const id = gifToDelete.id
+        dispatch({ type: "DELETE_RATED", payload: { id: id, userId: user.id } })
+        setOpen(false)
+    }
+
+    return (
         <>
-       
-        <h1> {user.username}'s profile</h1>
-        <h2>Filter By Rating</h2>
-        <ButtonGroup variant="text" color="primary">
-            <Button className='inputButton' onClick ={()=> updateFilter(1) }>One</Button>
-            <Button className='inputButton' onClick ={()=> updateFilter(2) }>Two</Button>
-            <Button className='inputButton' onClick ={()=> updateFilter(3) }>Three</Button>
-            <Button className='inputButton' onClick ={()=> updateFilter(4) }>Four</Button>
-            <Button className='inputButton' onClick ={()=> updateFilter(5) }>Five</Button>
-            <Button className='inputButton' onClick ={()=> resetFilter()}>All</Button>
-        </ButtonGroup>
-        {rated[0] ? <h2>{filterText}</h2> : <> <h2>{filterText}</h2> <h2>No Gifs Found</h2></>}
-        <div className="gifContainer">
-        {rated[0] &&
-        rated.map((gif) => {
-            return(
-                <div key={gif.id} className="gifCard">
-                <img src={gif.url}/>
-                <p>Rating:{gif.rating}</p>
-                <ProfileRate  gif={gif}/>
-                <Button onClick ={()=> deleteGif(gif.id)}>Delete</Button>
-                </div>
-            )
-        })}
-        </div>
+
+            <h1> {user.username}'s profile</h1>
+            <h2>Filter By Rating</h2>
+            <ButtonGroup variant="text" color="primary">
+                <Button className='inputButton' onClick={() => updateFilter(1)}>One</Button>
+                <Button className='inputButton' onClick={() => updateFilter(2)}>Two</Button>
+                <Button className='inputButton' onClick={() => updateFilter(3)}>Three</Button>
+                <Button className='inputButton' onClick={() => updateFilter(4)}>Four</Button>
+                <Button className='inputButton' onClick={() => updateFilter(5)}>Five</Button>
+                <Button className='inputButton' onClick={() => resetFilter()}>All</Button>
+            </ButtonGroup>
+            {rated[0] ? <h2>{filterText}</h2> : <> <h2>{filterText}</h2> <h2>No Gifs Found</h2></>}
+            <div className="gifContainer">
+                {rated[0] &&
+                    rated.map((gif) => {
+                        return (
+                            <div key={gif.id} className="gifCard">
+                                <img src={gif.url} />
+                                <p>Rating:{gif.rating}</p>
+                                <ProfileRate gif={gif} />
+                                <Button onClick={() => handleOpen(gif)}>Delete</Button>
+                            </div>
+                        )
+                    })}
+            </div>
+            <Dialog
+                
+                open={open}
+                onClose={handleClose}
+                
+            >
+                <DialogTitle >{`Are you sure you want to remove this gif?`}</DialogTitle>
+                <DialogContent >
+
+                
+                    <p className={"dialogText"}>
+                    <img src = {gifToDelete.url}/> <br/>
+                        It will no longer appear in you rated gifs.
+                    </p>
+                </DialogContent>
+                <DialogActions>
+                    <Button autoFocus onClick={handleClose} variant="contained">
+                        Cancel
+                    </Button>
+                    <Button onClick={() => deleteGif()} variant="contained" color="secondary">
+                        Remove 
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </>
     )
 }
