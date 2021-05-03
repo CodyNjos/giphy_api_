@@ -2,7 +2,7 @@ import { TextField, Button, Select, MenuItem, InputLabel, FormControl } from "@m
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 
-function SearchRateRadios({gif}) {
+function SearchRate ({gif}) {
     const store = useSelector(store => store);
     const dispatch = useDispatch()
     const [rating, setRating] = useState("")
@@ -17,6 +17,7 @@ function SearchRateRadios({gif}) {
 
     return (
         <>
+        {rating === "" ?
         <FormControl>
             <InputLabel id="rating">Add Rating</InputLabel>
             <Select
@@ -32,8 +33,10 @@ function SearchRateRadios({gif}) {
                 <MenuItem value={5}>5</MenuItem>
             </Select>
         </FormControl>
+ :
+ <p>Rating : {rating} </p>}
         </>
     )
 }
 
-export default SearchRateRadios
+export default SearchRate 

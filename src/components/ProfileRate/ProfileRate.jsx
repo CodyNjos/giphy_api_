@@ -2,7 +2,7 @@ import { TextField, Button, Select, MenuItem, InputLabel, FormControl } from "@m
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 
-function ProfileRateRadio({gif}) {
+function ProfileRate ({gif}) {
     const store = useSelector(store => store);
     const dispatch = useDispatch()
     const [rating, setRating] = useState("")
@@ -36,4 +36,4 @@ function ProfileRateRadio({gif}) {
     )
 }
 
-export default ProfileRateRadio
+export default ProfileRate 

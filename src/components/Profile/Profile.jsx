@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import ProfileRateRadio from "../ProfileRateRadio/ProfileRateRadio"
+import ProfileRate  from "../ProfileRate/ProfileRate"
 import './Profile.css'
 
 function Profile() {
@@ -24,7 +24,7 @@ function Profile() {
                 <div key={gif.id} className="gifCard">
                 <img src={gif.url}/>
                 <p>Rating:{gif.rating}</p>
-                <ProfileRateRadio gif={gif}/>
+                <ProfileRate  gif={gif}/>
                 </div>
                 
             
