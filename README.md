@@ -1,5 +1,5 @@
 # Giphy Api
-
+[](https://i.imgur.com/wshxjVv.png)
 
 A deployed version of this app can be found at [https://giphychallenge.herokuapp.com/](https://giphychallenge.herokuapp.com/)      
 This is hosted on a free cloud server, and may take 1-2 minutes to initially boot up.
